@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">eRPAS</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_print">Print</string>
+    <string name="title_location">Location</string>
+    <string name="title_help">Help</string>
+
+    <string name="print_title">E-RPas</string>
+    <string name="print_date">Tanggal</string>
+    <string name="print_time">Jam</string>
+    <string name="print_npwrd">Nomor Wajib Pajak</string>
+    <string name="print_nama_wp">Nama Wajib Pajak</string>
+    <string name="print_kode_billing">Kode Billing</string>
+    <string name="print_alamat_wp">Alamat Wajib Pajak</string>
+    <string name="print_kota">Kota</string>
+    <string name="print_nominal">Nominal Pengenaan</string>
+    <string name="print_status">Status</string>
+
+    <string name="label_connecting">Menyambungkan</string>
+    <string name="device_name">Nama Device</string>
+    <string name="device_address">Alamat Device</string>
+</resources>

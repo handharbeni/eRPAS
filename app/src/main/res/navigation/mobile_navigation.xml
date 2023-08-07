@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="io.github.handharbeni.erpas.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_search_wp"
+            app:destination="@id/navigation_search_wp" />
+        <action
+            android:id="@+id/action_navigation_home_to_wpRealisasiReport"
+            app:destination="@id/wpRealisasiReport" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_print"
+            app:destination="@id/navigation_print" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_search_wp"
+        android:name="io.github.handharbeni.erpas.ui.wp.WpSearchFragment"
+        android:label="Search WP"
+        tools:layout="@layout/fragment_search_wp">
+        <action
+            android:id="@+id/action_navigation_search_wp_to_navigation_detail_wp"
+            app:destination="@id/navigation_detail_wp" />
+        <action
+            android:id="@+id/action_navigation_search_wp_to_wpLaporanSkrd"
+            app:destination="@id/wpLaporanSkrd" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_detail_wp"
+        android:name="io.github.handharbeni.erpas.ui.wp.WpDetailFragment"
+        android:label="Detail WP"
+        tools:layout="@layout/fragment_detail_wp">
+        <action
+            android:id="@+id/action_navigation_detail_wp_to_navigation_detail_qris_wp"
+            app:destination="@id/navigation_detail_qris_wp" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_detail_qris_wp"
+        android:name="io.github.handharbeni.erpas.ui.wp.WpDetailQrisFragment"
+        android:label="QRIS"
+        tools:layout="@layout/fragment_detail_wp_qris"/>
+    <fragment
+        android:id="@+id/navigation_print"
+        android:name="io.github.handharbeni.erpas.ui.bt.BluetoothFragment"
+        android:label="Printer"
+        tools:layout="@layout/fragment_bluetooth"/>
+    <fragment
+        android:id="@+id/wpLaporanSkrd"
+        android:name="io.github.handharbeni.erpas.ui.wp.WpLaporanSkrd"
+        android:label="SKRD Report"
+        tools:layout="@layout/fragment_skrd_detail"/>
+    <fragment
+        android:id="@+id/wpRealisasiReport"
+        android:name="io.github.handharbeni.erpas.ui.wp.WpRealisasiReport"
+        android:label="Realisasi Report"
+        tools:layout="@layout/fragment_realisasi_report"/>
+
+</navigation>
