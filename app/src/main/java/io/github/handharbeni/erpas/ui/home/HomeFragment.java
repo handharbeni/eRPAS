@@ -60,6 +60,12 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		showToolbar(requireActivity());
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		binding = null;

@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -386,6 +387,18 @@ public class MainActivity extends BaseActivity implements BluetoothService.OnBlu
 						this,
 						Constant.BLUETOOTH_CONNECT_STATUS,
 						o -> checkStatusBt());
+	}
+
+	public void hideToolbar() {
+		getSupportActionBar().hide();
+		binding.navView.setVisibility(View.GONE);
+		binding.fabScanQr.setVisibility(View.GONE);
+	}
+
+	public void showToolbar() {
+		getSupportActionBar().show();
+		binding.navView.setVisibility(View.VISIBLE);
+		binding.fabScanQr.setVisibility(View.VISIBLE);
 	}
 
 	@SuppressLint("StaticFieldLeak")

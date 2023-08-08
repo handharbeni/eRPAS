@@ -1,5 +1,6 @@
 package io.github.handharbeni.erpas.cores;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,7 +20,9 @@ import androidx.navigation.fragment.FragmentNavigator;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -35,6 +38,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import io.github.handharbeni.erpas.MainActivity;
+import io.github.handharbeni.erpas.R;
 import io.github.handharbeni.erpas.apis.Client;
 import io.github.handharbeni.erpas.apis.ClientInterface;
 import io.github.handharbeni.erpas.database.AppDb;
@@ -224,4 +228,16 @@ public class BaseFragment extends Fragment {
                 }
             }
     );
+
+    public void hideToolbar(Activity activity){
+        if(getActivity() != null && activity instanceof MainActivity) {
+            ((MainActivity)getActivity()).hideToolbar();
+        }
+    }
+
+    public void showToolbar(Activity activity) {
+        if(getActivity() != null && activity instanceof MainActivity) {
+            ((MainActivity)getActivity()).showToolbar();
+        }
+    }
 }

@@ -16,6 +16,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def date = new Date();
+            def formattedDate = date.format('ddMMyy-HHmm')
+            outputFileName = "E-RPas-${variant.name}-${variant.versionName}-${formattedDate}.apk"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
