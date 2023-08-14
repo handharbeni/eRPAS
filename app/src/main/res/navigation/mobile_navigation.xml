@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_print"
             app:destination="@id/navigation_print" />
+        <action
+            android:id="@+id/action_navigation_home_to_wpLaporanSkrd"
+            app:destination="@id/wpLaporanSkrd" />
     </fragment>
     <fragment
         android:id="@+id/navigation_search_wp"

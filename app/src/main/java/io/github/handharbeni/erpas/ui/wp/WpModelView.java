@@ -3,6 +3,7 @@ package io.github.handharbeni.erpas.ui.wp;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import org.json.JSONObject;
@@ -49,7 +50,7 @@ public class WpModelView extends ViewModel {
 		RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
 		client.requestWp(body).enqueue(new Callback<ResponseWp>() {
 			@Override
-			public void onResponse(Call<ResponseWp> call, Response<ResponseWp> response) {
+			public void onResponse(@NonNull Call<ResponseWp> call, @NonNull Response<ResponseWp> response) {
 				if (response.isSuccessful()) {
 					if (response.body() != null) {
 						if (response.body().getStatus().equalsIgnoreCase("Sukses")) {
@@ -66,7 +67,7 @@ public class WpModelView extends ViewModel {
 			}
 
 			@Override
-			public void onFailure(Call<ResponseWp> call, Throwable t) {
+			public void onFailure(@NonNull Call<ResponseWp> call, @NonNull Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});
@@ -85,7 +86,7 @@ public class WpModelView extends ViewModel {
 		RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
 		client.requestTutup(body).enqueue(new Callback<GeneralResponse>() {
 			@Override
-			public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+			public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
 				if (response.isSuccessful()) {
 					if (response.body().getStatus().equalsIgnoreCase("sukses")) {
 						wpCallback.onSuccessTutup();
@@ -95,7 +96,7 @@ public class WpModelView extends ViewModel {
 			}
 
 			@Override
-			public void onFailure(Call<GeneralResponse> call, Throwable t) {
+			public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});
@@ -115,7 +116,7 @@ public class WpModelView extends ViewModel {
 		RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
 		client.requestQris(body).enqueue(new Callback<DataQris>() {
 			@Override
-			public void onResponse(Call<DataQris> call, Response<DataQris> response) {
+			public void onResponse(@NonNull Call<DataQris> call, @NonNull Response<DataQris> response) {
 				if (response.isSuccessful()) {
 					if (response.body().getStatus().equalsIgnoreCase("sukses")) {
 						wpCallback.onSuccessQris(response.body().getQris());
@@ -126,7 +127,7 @@ public class WpModelView extends ViewModel {
 			}
 
 			@Override
-			public void onFailure(Call<DataQris> call, Throwable t) {
+			public void onFailure(@NonNull Call<DataQris> call, @NonNull Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});
@@ -146,7 +147,7 @@ public class WpModelView extends ViewModel {
 
 		client.checkPayment(body).enqueue(new Callback<PaymentStatus>() {
 			@Override
-			public void onResponse(Call<PaymentStatus> call, Response<PaymentStatus> response) {
+			public void onResponse(@NonNull Call<PaymentStatus> call, @NonNull Response<PaymentStatus> response) {
 				if (response.isSuccessful()) {
 					if (response.body().getStatus().equalsIgnoreCase("sukses")) {
 						wpCallback.onPaymentSuccess(response.body());
@@ -156,7 +157,40 @@ public class WpModelView extends ViewModel {
 			}
 
 			@Override
-			public void onFailure(Call<PaymentStatus> call, Throwable t) {
+			public void onFailure(@NonNull Call<PaymentStatus> call, @NonNull Throwable t) {
+				wpCallback.onFailed(t.getMessage());
+			}
+		});
+	}
+
+	public void skrdReport() {
+		wpCallback.onLoad();
+		client.skrdReport().enqueue(new Callback<ListResponseSkrd>() {
+			@Override
+			public void onResponse(
+					@NonNull Call<ListResponseSkrd> call, @NonNull Response<ListResponseSkrd> response
+			) {
+				if (response.isSuccessful()) {
+					if (response.body() != null) {
+						if (response.body().getStatus().equalsIgnoreCase("sukses")) {
+							if (response.body().getDataSkrd().size() > 0) {
+								wpCallback.onSkrdSuccess(response.body());
+							} else {
+								wpCallback.onFailed("Gagal mendapat data");
+							}
+						} else {
+							wpCallback.onFailed("Gagal mendapat data");
+						}
+					} else {
+						wpCallback.onFailed("Gagal mendapat data");
+					}
+				} else {
+					wpCallback.onFailed("Gagal mendapat data");
+				}
+			}
+
+			@Override
+			public void onFailure(@NonNull Call<ListResponseSkrd> call, @NonNull Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});
@@ -176,7 +210,7 @@ public class WpModelView extends ViewModel {
 		client.skrdReport(body).enqueue(new Callback<ListResponseSkrd>() {
 			@Override
 			public void onResponse(
-					Call<ListResponseSkrd> call, Response<ListResponseSkrd> response
+					@NonNull Call<ListResponseSkrd> call, @NonNull Response<ListResponseSkrd> response
 			) {
 				if (response.isSuccessful()) {
 					if (response.body() != null) {
@@ -194,7 +228,7 @@ public class WpModelView extends ViewModel {
 			}
 
 			@Override
-			public void onFailure(Call<ListResponseSkrd> call, Throwable t) {
+			public void onFailure(@NonNull Call<ListResponseSkrd> call, @NonNull Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});
@@ -205,7 +239,7 @@ public class WpModelView extends ViewModel {
 		client.realisasiReport().enqueue(new Callback<LaporanRealisasi>() {
 			@Override
 			public void onResponse(
-					Call<LaporanRealisasi> call, Response<LaporanRealisasi> response
+					@NonNull Call<LaporanRealisasi> call, @NonNull Response<LaporanRealisasi> response
 			) {
 				if (response.isSuccessful()) {
 					if (response.body() != null) {
@@ -223,7 +257,7 @@ public class WpModelView extends ViewModel {
 			}
 
 			@Override
-			public void onFailure(Call<LaporanRealisasi> call, Throwable t) {
+			public void onFailure(@NonNull Call<LaporanRealisasi> call, @NonNull Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});

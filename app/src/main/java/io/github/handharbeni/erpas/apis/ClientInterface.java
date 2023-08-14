@@ -39,6 +39,9 @@ public interface ClientInterface {
     Call<PaymentStatus> checkPayment(@Body RequestBody requestBody);
 
     @POST("lap_skrd")
+    Call<ListResponseSkrd> skrdReport();
+
+    @POST("lap_skrd")
     Call<ListResponseSkrd> skrdReport(@Body RequestBody requestBody);
 
     @POST("lap_realisasi")

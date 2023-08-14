@@ -59,17 +59,21 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			if (getArguments() != null) {
-				listResponseSkrd = getArguments().getSerializable(KEY_SKRD, ListResponseSkrd.class);
-				npwrd = getArguments().getString(TAG_NPWRD);
-			}
-		} else {
-			listResponseSkrd = (ListResponseSkrd) getArguments().getSerializable(KEY_SKRD);
-			npwrd = getArguments().getString(TAG_NPWRD);
-		}
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//			if (getArguments() != null) {
+//				listResponseSkrd = getArguments().getSerializable(KEY_SKRD, ListResponseSkrd.class);
+//				npwrd = getArguments().getString(TAG_NPWRD);
+//			}
+//		} else {
+//			listResponseSkrd = (ListResponseSkrd) getArguments().getSerializable(KEY_SKRD);
+//			npwrd = getArguments().getString(TAG_NPWRD);
+//		}
+		loadData();
+	}
 
-		setupData();
+
+	void loadData() {
+		wpModelView.skrdReport();
 	}
 
 
@@ -110,6 +114,11 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 	@Override
 	public void onSkrdSuccess(ListResponseSkrd listResponseSkrd) {
 		doneLoading();
+		this.listResponseSkrd = listResponseSkrd;
+		setupData();
+
+		binding.rvItemWp.setVisibility(View.VISIBLE);
+		binding.txtNoData.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -125,6 +134,8 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 	@Override
 	public void onFailed(String message) {
 		doneLoading();
+		binding.rvItemWp.setVisibility(View.GONE);
+		binding.txtNoData.setVisibility(View.VISIBLE);
 	}
 
 	@Override

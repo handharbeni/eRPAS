@@ -35,8 +35,6 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 	public static String TAG_REALISASI = "REALISASI";
 	private FragmentHomeBinding binding;
 	private HomeViewModel homeViewModel;
-	private View root;
-	private MenuAdapter menuAdapter;
 
 	public View onCreateView(
 			@NonNull LayoutInflater inflater,
@@ -47,7 +45,7 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 		homeViewModel.setupData(requireContext());
 
 		binding = FragmentHomeBinding.inflate(inflater, container, false);
-		root = binding.getRoot();
+		View root = binding.getRoot();
 		navController = NavHostFragment.findNavController(this);
 
 		return root;
@@ -75,7 +73,8 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 		GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
 		binding.rvListMenu.setLayoutManager(gridLayoutManager);
 
-		menuAdapter = new MenuAdapter(requireContext(), homeViewModel.getMenu().getValue(), this);
+		MenuAdapter menuAdapter = new MenuAdapter(requireContext(), homeViewModel.getMenu()
+		                                                                         .getValue(), this);
 		binding.rvListMenu.setAdapter(menuAdapter);
 	}
 
@@ -89,7 +88,7 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 		} else if (menu.equalsIgnoreCase("SKRD")) {
 			bundle.putBoolean(TAG_SKRD, true);
 			MainActivity.isInBackStack = true;
-			navController.navigate(R.id.action_navigation_home_to_navigation_search_wp, bundle);
+			navController.navigate(R.id.action_navigation_home_to_wpLaporanSkrd, bundle);
 		} else if (menu.equalsIgnoreCase("Data Pasar")) {
 			MainActivity.isInBackStack = true;
 		} else if (menu.equalsIgnoreCase("Realisasi")) {
