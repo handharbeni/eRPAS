@@ -1,7 +1,6 @@
 package io.github.handharbeni.erpas.ui.wp;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -18,13 +17,14 @@ import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
 import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
 import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
 import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
+import io.github.handharbeni.erpas.cores.BaseModelView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WpModelView extends ViewModel {
+public class WpModelView extends BaseModelView {
 	ClientInterface client;
 
 	WpCallback wpCallback;

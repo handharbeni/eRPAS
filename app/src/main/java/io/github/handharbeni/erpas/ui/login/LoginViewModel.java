@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import io.github.handharbeni.erpas.apis.Client;
 import io.github.handharbeni.erpas.apis.ClientInterface;
+import io.github.handharbeni.erpas.cores.BaseModelView;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends BaseModelView {
 	ClientInterface client;
 	LoginCallback loginCallback;
 	public void setupClient(Context context, LoginCallback loginCallback) {

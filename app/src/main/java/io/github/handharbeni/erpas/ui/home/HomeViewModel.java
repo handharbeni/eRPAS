@@ -1,5 +1,6 @@
 package io.github.handharbeni.erpas.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -11,8 +12,10 @@ import androidx.lifecycle.ViewModel;
 import java.util.HashMap;
 
 import io.github.handharbeni.erpas.R;
+import io.github.handharbeni.erpas.cores.BaseModelView;
 
-public class HomeViewModel extends ViewModel {
+public class HomeViewModel extends BaseModelView {
+	@SuppressLint("StaticFieldLeak")
 	private Context context;
 	private final MutableLiveData<HashMap<String, Drawable>> listMenu;
 

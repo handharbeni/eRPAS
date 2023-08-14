@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+import io.github.handharbeni.erpas.cores.BaseModelView;
+
+public class NotificationsViewModel extends BaseModelView {
 
 	private final MutableLiveData<String> mText;
 
