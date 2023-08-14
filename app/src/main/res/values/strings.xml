@@ -21,4 +21,6 @@
     <string name="label_connecting">Menyambungkan</string>
     <string name="device_name">Nama Device</string>
     <string name="device_address">Alamat Device</string>
+    <string name="npwrd">NPWRD</string>
+    <string name="no_data_available">No Data Available</string>
 </resources>
