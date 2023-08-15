@@ -24,6 +24,7 @@ import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
 import io.github.handharbeni.erpas.cores.BaseFragment;
 import io.github.handharbeni.erpas.databinding.FragmentDetailWpBinding;
 import io.github.handharbeni.erpas.ui.wp.adapter.DetailWpAdapter;
+import io.github.handharbeni.erpas.utils.UtilDate;
 
 public class WpDetailFragment extends BaseFragment
 		implements WpModelView.WpCallback, DetailWpAdapter.DetailWpCallback {
@@ -119,6 +120,7 @@ public class WpDetailFragment extends BaseFragment
 	}
 
 	void setupData() {
+		checkQris();
 		detailWpAdapter.updateData(
 				responseWp.getDataTagihan()!=null?
 						responseWp.getDataTagihan()
@@ -126,18 +128,32 @@ public class WpDetailFragment extends BaseFragment
 
 		DataWp dataWp = responseWp.getDataWp();
 
-		binding.txtNpwrd.setText(String.format("Nomor NPWRD: %s", dataWp.getNpwrd()));
-		binding.txtNama.setText(String.format("Nama Wajib Pajak: %s", dataWp.getNmWpWr()));
-		binding.txtAlamat.setText(String.format("Alamat Wajib Pajak: %s", dataWp.getAlamatWpWr()));
-		binding.txtKota.setText(String.format("Kota: %s", dataWp.getKota()));
-		binding.txtNominal.setText(String.format("Nominal Pengenaan: %s", dataWp.getNominal()));
-		binding.btnTutup.setOnClickListener(v -> wpModelView.kiosTutup(dataWp.getNpwrd(), "0"));
+		binding.txtNpwrd.setText(dataWp.getNpwrd());
+		binding.txtNama.setText(dataWp.getNmWpWr());
+		binding.txtAlamat.setText(dataWp.getAlamatWpWr());
+		binding.txtKota.setText(dataWp.getKota());
+		binding.txtNominal.setText(dataWp.getNominal());
+		binding.btnTutup.setOnClickListener(v -> wpModelView.kiosTutup(dataWp.getNpwrd(), dataWp.getNominal()));
 		binding.btnQris.setOnClickListener(v -> {
+			String date = UtilDate.longToDate(System.currentTimeMillis(), "M");
+			utilDb.putBoolean(date+"-"+dataWp.getNpwrd(), true);
+			binding.btnTutup.setEnabled(false);
+
 			DataTagihan dataTagihan = new DataTagihan();
 			dataTagihan.setKdRekening(dataWp.getNpwrd());
 			dataTagihan.setTotalRetribusi(dataWp.getNominal());
 			onQrisClick(dataTagihan);
 		});
+	}
+
+	void checkQris() {
+		String date = UtilDate.longToDate(System.currentTimeMillis(), "M");
+		boolean hasQris = utilDb.getBoolean(date+"-"+ responseWp.getDataWp().getNpwrd());
+		if (hasQris) {
+			binding.btnTutup.setEnabled(false);
+		} else {
+			binding.btnTutup.setEnabled(true);
+		}
 	}
 
 	@Override

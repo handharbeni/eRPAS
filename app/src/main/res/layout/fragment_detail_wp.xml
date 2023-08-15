@@ -13,9 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:text="Nomor NPWRD:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
             android:layout_margin="5dp"
             android:id="@+id/txtNpwrd"
             android:text="NPWRD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Nama Wajib Pajak:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
@@ -24,10 +33,20 @@
             android:text="NAMA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Alamat Wajib Pajak:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <TextView
             android:layout_margin="5dp"
             android:id="@+id/txtAlamat"
             android:text="ALAMAT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Kota:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
@@ -36,12 +55,18 @@
             android:text="KOTA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Nominal Pengenaan:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <TextView
             android:layout_margin="5dp"
             android:id="@+id/txtNominal"
             android:text="Nominal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
