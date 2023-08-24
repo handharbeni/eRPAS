@@ -59,6 +59,9 @@ public class LoginFragment extends BaseFragment
 
 			loginViewModel.doLogin(username, password);
 		});
+		binding.txtToRegister.setOnClickListener(v -> {
+			navController.navigate(R.id.action_loginFragment_to_registerFragment);
+		});
 	}
 
 	@Override
