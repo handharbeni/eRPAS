@@ -3,96 +3,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:padding="10dp"
+    <androidx.cardview.widget.CardView
+        android:elevation="40dp"
+        app:cardElevation="40dp"
+        app:cardCornerRadius="12dp"
+        android:fitsSystemWindows="true"
+        app:cardPreventCornerOverlap="false"
+        android:layout_margin="10dp"
+        android:id="@+id/cvDetail"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/llDetail"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:text="Nomor NPWRD:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/txtNpwrd"
-            android:text="NPWRD"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Nama Wajib Pajak:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/txtNama"
-            android:text="NAMA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Alamat Wajib Pajak:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/txtAlamat"
-            android:text="ALAMAT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Kota:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/txtKota"
-            android:text="KOTA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Nominal Pengenaan:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/txtNominal"
-            android:text="Nominal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnQris"
-                android:theme="@style/ThemeOverlay.Material3.Button.ElevatedButton"
-                android:layout_weight="0.5"
-                android:layout_margin="5dp"
-                android:text="QRIS"
+            <LinearLayout
+                android:padding="10dp"
+                android:id="@+id/llDetail"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:backgroundTint="@android:color/holo_red_light"
-                android:layout_weight="0.5"
-                android:layout_margin="5dp"
-                android:id="@+id/btnTutup"
-                android:text="KIOS TUTUP"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Nomor NPWRD:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:id="@+id/txtNpwrd"
+                    android:text="NPWRD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="Nama Wajib Pajak:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:id="@+id/txtNama"
+                    android:text="NAMA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="Alamat Wajib Pajak:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:id="@+id/txtAlamat"
+                    android:text="ALAMAT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="Kota:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:id="@+id/txtKota"
+                    android:text="KOTA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="Nominal Pengenaan:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:id="@+id/txtNominal"
+                    android:text="Nominal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:fitsSystemWindows="true"
+                android:gravity="bottom"
+                android:layout_below="@id/llDetail"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_height="wrap_content">
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:id="@+id/btnQris"
+                    android:theme="@style/ThemeOverlay.Material3.Button.TextButton"
+                    android:layout_weight="0.5"
+                    android:text="QRIS"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btnTutup"
+                    android:text="KIOS TUTUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:layout_marginBottom="?attr/actionBarSize"
         android:id="@+id/rvItemWp"
-        app:layout_constraintTop_toBottomOf="@id/llDetail"
+        app:layout_constraintTop_toBottomOf="@id/cvDetail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
