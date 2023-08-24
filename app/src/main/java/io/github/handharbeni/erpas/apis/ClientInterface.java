@@ -7,6 +7,8 @@ import io.github.handharbeni.erpas.apis.responses.WP.GeneralResponse;
 import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
 import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
 import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
+import io.github.handharbeni.erpas.apis.responses.WP.ResponseLogin;
+import io.github.handharbeni.erpas.apis.responses.WP.ResponseRegister;
 import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
 import io.github.handharbeni.erpas.apis.responses.data.DataBphtb;
 import io.github.handharbeni.erpas.apis.responses.data.DataDendaPayment;
@@ -46,4 +48,10 @@ public interface ClientInterface {
 
     @POST("lap_realisasi")
     Call<LaporanRealisasi> realisasiReport();
+
+    @POST("login_user")
+    Call<ResponseLogin> login(@Body RequestBody requestBody);
+
+    @POST("register_user")
+    Call<ResponseRegister> register(@Body RequestBody requestBody);
 }

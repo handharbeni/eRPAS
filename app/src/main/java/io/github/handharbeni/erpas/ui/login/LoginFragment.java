@@ -53,7 +53,12 @@ public class LoginFragment extends BaseFragment
 	}
 
 	void setupTrigger() {
-		binding.btnLogin.setOnClickListener(v -> loginViewModel.doLogin());
+		binding.btnLogin.setOnClickListener(v -> {
+			String username = binding.txtUsername.getEditText().getText().toString();
+			String password = binding.txtPassword.getEditText().getText().toString();
+
+			loginViewModel.doLogin(username, password);
+		});
 	}
 
 	@Override
