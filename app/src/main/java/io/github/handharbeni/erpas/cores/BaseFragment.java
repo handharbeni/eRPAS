@@ -240,4 +240,8 @@ public class BaseFragment extends Fragment {
             ((MainActivity)getActivity()).showToolbar();
         }
     }
+
+    public void logout() {
+        utilDb.clear();
+    }
 }

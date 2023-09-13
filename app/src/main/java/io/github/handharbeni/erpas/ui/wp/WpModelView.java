@@ -25,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WpModelView extends BaseModelView {
+	Context context;
 	ClientInterface client;
 
 	WpCallback wpCallback;
@@ -34,7 +35,8 @@ public class WpModelView extends BaseModelView {
 	}
 
 	public void setupClient(Context context, WpCallback wpCallback) {
-		client = Client.getInstance(context, ClientInterface.class);
+		this.context = context;
+		client = Client.getInstance(this.context, ClientInterface.class);
 		this.wpCallback = wpCallback;
 	}
 
@@ -109,6 +111,7 @@ public class WpModelView extends BaseModelView {
 		HashMap<String, String> dataNpwrd = new HashMap<>();
 		dataNpwrd.put("npwrd", npwrd);
 		dataNpwrd.put("amount", amount);
+		dataNpwrd.put("id_user", getDb(this.context).getString("IdUser"));
 
 		JSONObject jsonObject = new JSONObject(dataNpwrd);
 

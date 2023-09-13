@@ -22,6 +22,12 @@
         <action
             android:id="@+id/action_navigation_home_to_wpLaporanSkrd"
             app:destination="@id/wpLaporanSkrd" />
+        <action
+            android:id="@+id/action_navigation_home_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/navigation_search_wp"

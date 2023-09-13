@@ -60,6 +60,7 @@ public class LoginViewModel extends BaseModelView {
 							getDb(context).putString("Username", response.body().getUsername());
 							getDb(context).putString("Fullname", response.body().getFullname());
 							getDb(context).putString("Email", response.body().getEmail());
+							getDb(context).putString("IdUser", response.body().getId());
 							getDb(context).putBoolean(Constant.ISLOGGEDIN, true);
 							loginCallback.onLoginSuccess();
 						} else {

@@ -18,6 +18,9 @@ public class ResponseLogin implements Serializable {
 	@SerializedName("email")
 	@Expose
 	private String email;
+	@SerializedName("id")
+	@Expose
+	private String id;
 	@SerializedName("created_at")
 	@Expose
 	private String createdAt;
@@ -52,6 +55,14 @@ public class ResponseLogin implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getCreatedAt() {

@@ -4,6 +4,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -47,7 +50,7 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 		binding = FragmentHomeBinding.inflate(inflater, container, false);
 		View root = binding.getRoot();
 		navController = NavHostFragment.findNavController(this);
-
+		setHasOptionsMenu(true);
 		return root;
 	}
 
@@ -55,6 +58,24 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		setupAdapter();
+	}
+
+	@Override
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+		inflater.inflate(R.menu.toolbar_menu, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menuLogout :
+				logout();
+				navigate(R.id.action_navigation_home_to_loginFragment);
+				hideToolbar(requireActivity());
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

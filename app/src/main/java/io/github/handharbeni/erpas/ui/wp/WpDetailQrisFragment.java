@@ -29,6 +29,8 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	DataTagihan dataTagihan;
 
+	PaymentStatus paymentStatus;
+
 	private int mInterval = 5000; // 5 seconds by default, can be changed later
 	private Handler mHandler;
 
@@ -84,6 +86,11 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	public void setupListener() {
 		binding.btnOther.setOnClickListener(v -> navController.navigateUp());
+		binding.btnPrint.setOnClickListener(v -> {
+			if (this.paymentStatus != null) {
+				setState(Constant.BLUETOOTH_PRINT, paymentStatus);
+			}
+		});
 	}
 
 	@Override
@@ -98,9 +105,14 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	@Override
 	public void onPaymentSuccess(PaymentStatus paymentStatus) {
+		this.paymentStatus = paymentStatus;
+
+		binding.btnPrint.setVisibility(View.VISIBLE);
+		binding.btnOther.setVisibility(View.GONE);
+
 		stopRepeatingTask();
-		setState(Constant.BLUETOOTH_PRINT, paymentStatus);
-		navController.navigateUp();
+//		setState(Constant.BLUETOOTH_PRINT, paymentStatus);
+//		navController.navigateUp();
 	}
 
 	@Override
@@ -120,6 +132,10 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	@Override
 	public void onSuccessQris(String qris) {
+		binding.btnOther.setVisibility(View.GONE);
+
+		binding.txtIdStatus.setText("Status Pembayaran: Telah diterima");
+
 		doneLoading();
 		bindData(qris);
 		setupListener();
