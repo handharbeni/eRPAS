@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
+import io.github.handharbeni.erpas.R;
 import io.github.handharbeni.erpas.apis.responses.WP.DataSkrd;
+import io.github.handharbeni.erpas.apis.responses.WP.DataTagihan;
 import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
 import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
 import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
@@ -141,5 +143,18 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 	@Override
 	public void onItemClick(DataSkrd dataSkrd) {
 		// do some action
+	}
+
+	@Override
+	public void onQrisClick(DataSkrd dataSkrd) {
+		// do some action
+		DataTagihan dataTagihan = new DataTagihan();
+		dataTagihan.setKdRekening(dataSkrd.getNpwrd());
+		dataTagihan.setTotalRetribusi(dataSkrd.getTotalRetribusi());
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(WpDetailFragment.KEY_WP, dataTagihan);
+
+		navController.navigate(R.id.action_wpLaporanSkrd_to_navigation_detail_qris_wp2, bundle);
 	}
 }

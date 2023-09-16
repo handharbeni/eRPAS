@@ -111,7 +111,7 @@ public class WpModelView extends BaseModelView {
 		HashMap<String, String> dataNpwrd = new HashMap<>();
 		dataNpwrd.put("npwrd", npwrd);
 		dataNpwrd.put("amount", amount);
-		dataNpwrd.put("id_user", getDb(this.context).getString("IdUser"));
+		dataNpwrd.put("_id_user", getDb(this.context).getString("IdUser"));
 
 		JSONObject jsonObject = new JSONObject(dataNpwrd);
 
@@ -142,6 +142,7 @@ public class WpModelView extends BaseModelView {
 		HashMap<String, String> dataNpwrd = new HashMap<>();
 		dataNpwrd.put("npwrd", npwrd);
 		dataNpwrd.put("amount", amount);
+		dataNpwrd.put("_id_user", getDb(this.context).getString("IdUser"));
 
 		JSONObject jsonObject = new JSONObject(dataNpwrd);
 
@@ -154,9 +155,12 @@ public class WpModelView extends BaseModelView {
 				if (response.isSuccessful()) {
 					if (response.body().getStatus().equalsIgnoreCase("sukses")) {
 						wpCallback.onPaymentSuccess(response.body());
+					} else {
+						wpCallback.onFailed("Gagal mendapat data");
 					}
+				} else {
+					wpCallback.onFailed("Gagal mendapat data");
 				}
-				wpCallback.onFailed("Gagal mendapat data");
 			}
 
 			@Override

@@ -4,99 +4,126 @@
     android:paddingTop="10dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:layout_margin="15dp"
-    android:elevation="10dp"
-    app:cardElevation="10dp"
+    android:layout_margin="25dp"
+    android:elevation="40dp"
+    app:cardElevation="40dp"
     app:cardPreventCornerOverlap="false"
     app:cardCornerRadius="10dp"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginBottom="10dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/llItem"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="10dp"
-                android:id="@+id/itemKdRekening"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:lineHeight="20dp"
-                android:text="Test Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_margin="10dp"
-                android:id="@+id/itemBulanTahun"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:lineHeight="20dp"
-                android:text="Test Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/itemKdRekening"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="10dp"
-                android:id="@+id/itemStatusKetetapan"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:lineHeight="20dp"
-                android:text="Test Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/itemStatusKetetapan"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="10dp"
-                android:id="@+id/itemStatusBayar"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:lineHeight="20dp"
-                android:text="Test Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/itemStatusBayar"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="10dp"
-                android:id="@+id/itemStatusLunas"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:lineHeight="20dp"
-                android:text="Test Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/itemStatusLunas"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="10dp"
-                android:id="@+id/itemTotalBayar"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:lineHeight="20dp"
-                android:text="Test Title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+                android:layout_height="wrap_content">
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/itemKdRekening"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lineHeight="20dp"
+                    android:text="Test Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/itemBulanTahun"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lineHeight="20dp"
+                    android:text="Test Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/itemKdRekening"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/itemStatusKetetapan"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lineHeight="20dp"
+                    android:text="Test Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/itemStatusKetetapan"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/itemStatusBayar"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lineHeight="20dp"
+                    android:text="Test Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/itemStatusBayar"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/itemStatusLunas"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lineHeight="20dp"
+                    android:text="Test Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/itemStatusLunas"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/itemTotalBayar"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lineHeight="20dp"
+                    android:text="Test Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llPayment"
+            android:visibility="gone"
+            android:fitsSystemWindows="true"
+            android:gravity="bottom"
+            android:layout_below="@id/llItem"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:id="@+id/btnQris"
+                android:theme="@style/ThemeOverlay.Material3.Button.TextButton"
+                android:layout_weight="0.5"
+                android:text="QRIS"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

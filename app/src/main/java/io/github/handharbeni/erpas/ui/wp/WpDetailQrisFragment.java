@@ -33,11 +33,13 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	private int mInterval = 5000; // 5 seconds by default, can be changed later
 	private Handler mHandler;
+	private boolean recurringCheck = true;
 
 	Runnable mStatusChecker = () -> {
 		try {
-			// do check status
-			checkStatus();
+			if (recurringCheck) {
+				checkStatus();
+			}
 		} catch (Exception ignored) {
 		}
 	};
@@ -106,11 +108,23 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 	@Override
 	public void onPaymentSuccess(PaymentStatus paymentStatus) {
 		this.paymentStatus = paymentStatus;
+		doneLoading();
 
-		binding.btnPrint.setVisibility(View.VISIBLE);
-		binding.btnOther.setVisibility(View.GONE);
+		if (paymentStatus.getStatusBayar().equalsIgnoreCase("0")) {
+			// belum ada pembayaran
+		} else {
+			// sudah ada pembayaran
 
-		stopRepeatingTask();
+			binding.txtIdStatus.setText("Status Pembayaran: Belum diterima");
+
+			binding.btnPrint.setVisibility(View.VISIBLE);
+			binding.btnOther.setVisibility(View.GONE);
+
+
+
+			stopRepeatingTask();
+		}
+
 //		setState(Constant.BLUETOOTH_PRINT, paymentStatus);
 //		navController.navigateUp();
 	}
@@ -122,19 +136,19 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	@Override
 	public void onSkrdSuccess(ListResponseSkrd listResponseSkrd) {
-
+		doneLoading();
 	}
 
 	@Override
 	public void onRealisasiSuccess(LaporanRealisasi laporanRealisasi) {
-
+		doneLoading();
 	}
 
 	@Override
 	public void onSuccessQris(String qris) {
 		binding.btnOther.setVisibility(View.GONE);
 
-		binding.txtIdStatus.setText("Status Pembayaran: Telah diterima");
+		binding.txtIdStatus.setText("Status Pembayaran: Belum diterima");
 
 		doneLoading();
 		bindData(qris);
@@ -159,7 +173,9 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 	}
 
 	void stopRepeatingTask() {
+		doneLoading();
 		mHandler.removeCallbacks(mStatusChecker);
+		recurringCheck = false;
 	}
 
 	@Override

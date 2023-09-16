@@ -2,6 +2,7 @@ package io.github.handharbeni.erpas.ui.wp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,7 @@ public class DetailWpSkrdAdapter extends RecyclerView.Adapter<DetailWpSkrdAdapte
 		holder.bind(dataSkrd);
 
 		holder.itemView.setOnClickListener(v -> skrdCallback.onItemClick(dataSkrd));
+		holder.binding.btnQris.setOnClickListener(v -> skrdCallback.onQrisClick(dataSkrd));
 	}
 
 	@Override
@@ -89,10 +91,16 @@ public class DetailWpSkrdAdapter extends RecyclerView.Adapter<DetailWpSkrdAdapte
 							"Belum Lunas" : "Lunas"
 			));
 			binding.itemTotalBayar.setText(String.format("Total Bayar: %s", dataSkrd.getTotalRetribusi()));
+			if (dataSkrd.getStatusBayar().equalsIgnoreCase("0")) {
+				binding.llPayment.setVisibility(View.VISIBLE);
+			} else {
+				binding.llPayment.setVisibility(View.GONE);
+			}
 		}
 	}
 
 	public interface SkrdCallback{
 		void onItemClick(DataSkrd dataSkrd);
+		void onQrisClick(DataSkrd dataSkrd);
 	}
 }

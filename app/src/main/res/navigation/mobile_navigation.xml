@@ -64,7 +64,11 @@
         android:id="@+id/wpLaporanSkrd"
         android:name="io.github.handharbeni.erpas.ui.wp.WpLaporanSkrd"
         android:label="SKRD Report"
-        tools:layout="@layout/fragment_skrd_detail"/>
+        tools:layout="@layout/fragment_skrd_detail">
+        <action
+            android:id="@+id/action_wpLaporanSkrd_to_navigation_detail_qris_wp2"
+            app:destination="@id/navigation_detail_qris_wp" />
+    </fragment>
     <fragment
         android:id="@+id/wpRealisasiReport"
         android:name="io.github.handharbeni.erpas.ui.wp.WpRealisasiReport"
