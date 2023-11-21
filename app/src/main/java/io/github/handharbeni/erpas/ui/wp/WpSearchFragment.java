@@ -138,7 +138,7 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 
 	void scanQr(View view) {
 		ScanOptions options = new ScanOptions();
-		options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+		options.setDesiredBarcodeFormats(ScanOptions.ALL_CODE_TYPES);
 		options.setOrientationLocked(false);
 		options.setPrompt("Kios QRCODE");
 		options.setCameraId(0);
