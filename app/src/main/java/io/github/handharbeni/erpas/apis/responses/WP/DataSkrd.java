@@ -54,6 +54,9 @@ public class DataSkrd implements Serializable {
 	@SerializedName("status_lunas")
 	@Expose
 	private String statusLunas;
+	@SerializedName("kode_billing")
+	@Expose
+	private String kodeBilling;
 
 	public String getIdSkrd() {
 		return idSkrd;
@@ -181,5 +184,13 @@ public class DataSkrd implements Serializable {
 
 	public void setStatusLunas(String statusLunas) {
 		this.statusLunas = statusLunas;
+	}
+
+	public String getKodeBilling() {
+		return kodeBilling;
+	}
+
+	public void setKodeBilling(String kodeBilling) {
+		this.kodeBilling = kodeBilling;
 	}
 }

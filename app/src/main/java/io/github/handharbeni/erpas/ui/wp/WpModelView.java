@@ -203,6 +203,43 @@ public class WpModelView extends BaseModelView {
 		});
 	}
 
+	public void skrdReport(String key, String value) {
+		wpCallback.onLoad();
+
+		HashMap<String, String> dataNpwrd = new HashMap<>();
+		dataNpwrd.put(key, value);
+
+		JSONObject jsonObject = new JSONObject(dataNpwrd);
+
+		MediaType mediaType = MediaType.parse("application/json");
+		RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
+
+		client.skrdReport(body).enqueue(new Callback<ListResponseSkrd>() {
+			@Override
+			public void onResponse(
+					@NonNull Call<ListResponseSkrd> call, @NonNull Response<ListResponseSkrd> response
+			) {
+				if (response.isSuccessful()) {
+					if (response.body() != null) {
+						if (response.body().getStatus().equalsIgnoreCase("sukses")) {
+							wpCallback.onSkrdSuccess(response.body());
+						} else {
+							wpCallback.onFailed("Gagal mendapat data");
+						}
+					} else {
+						wpCallback.onFailed("Gagal mendapat data");
+					}
+				} else {
+					wpCallback.onFailed("Gagal mendapat data");
+				}
+			}
+
+			@Override
+			public void onFailure(@NonNull Call<ListResponseSkrd> call, @NonNull Throwable t) {
+				wpCallback.onFailed(t.getMessage());
+			}
+		});
+	}
 	public void skrdReport(String npwrd) {
 		wpCallback.onLoad();
 

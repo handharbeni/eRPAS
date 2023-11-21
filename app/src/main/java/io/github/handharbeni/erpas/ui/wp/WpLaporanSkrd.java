@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.github.handharbeni.erpas.R;
 import io.github.handharbeni.erpas.apis.responses.WP.DataSkrd;
@@ -26,9 +28,11 @@ import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
 import io.github.handharbeni.erpas.cores.BaseFragment;
 import io.github.handharbeni.erpas.databinding.FragmentSkrdDetailBinding;
 import io.github.handharbeni.erpas.ui.wp.adapter.DetailWpSkrdAdapter;
+import io.github.handharbeni.erpas.utils.Constant;
 
-public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallback,
-                                                           DetailWpSkrdAdapter.SkrdCallback {
+public class WpLaporanSkrd extends BaseFragment
+		implements WpModelView.WpCallback,
+		           DetailWpSkrdAdapter.SkrdCallback {
 
 
 	public static String KEY_SKRD = "SKRD_REPORT";
@@ -38,6 +42,8 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 	WpModelView wpModelView;
 
 	ListResponseSkrd listResponseSkrd;
+
+	ListResponseSkrd tempListResponseSkrd;
 	String npwrd;
 
 	@Nullable
@@ -61,21 +67,38 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//			if (getArguments() != null) {
-//				listResponseSkrd = getArguments().getSerializable(KEY_SKRD, ListResponseSkrd.class);
-//				npwrd = getArguments().getString(TAG_NPWRD);
-//			}
-//		} else {
-//			listResponseSkrd = (ListResponseSkrd) getArguments().getSerializable(KEY_SKRD);
-//			npwrd = getArguments().getString(TAG_NPWRD);
-//		}
+
 		loadData();
+
+		binding.selectStatusBayar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				if (position == 0) {
+					// semua
+					try {
+						adapter.filterStatus("-1");
+					} catch (Exception ignored) {}
+				} else if (position == 1) {
+					try {
+						adapter.filterStatus("1");
+					} catch (Exception ignored) {}
+				} else if (position == 2) {
+					try {
+						adapter.filterStatus("0");
+					} catch (Exception ignored) {}
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
 	}
 
 
 	void loadData() {
-		wpModelView.skrdReport();
+		wpModelView.skrdReport("id_user", utilDb.getString("IdUser"));
 	}
 
 
@@ -156,5 +179,18 @@ public class WpLaporanSkrd extends BaseFragment implements WpModelView.WpCallbac
 		bundle.putSerializable(WpDetailFragment.KEY_WP, dataTagihan);
 
 		navController.navigate(R.id.action_wpLaporanSkrd_to_navigation_detail_qris_wp2, bundle);
+	}
+
+	@Override
+	public void onPrintClick(DataSkrd dataSkrd) {
+		PaymentStatus paymentStatus = new PaymentStatus();
+		paymentStatus.setAmount(dataSkrd.getTotalRetribusi());
+		paymentStatus.setTransactionDate(dataSkrd.getTglSkrd());
+		paymentStatus.setNpwrd(dataSkrd.getNpwrd());
+		paymentStatus.setKodeBilling(dataSkrd.getKodeBilling());
+		paymentStatus.setStatusBayar(dataSkrd.getStatusBayar());
+		paymentStatus.setStatus(dataSkrd.getStatusKetetapan());
+
+		setState(Constant.BLUETOOTH_PRINT, paymentStatus);
 	}
 }

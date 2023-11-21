@@ -120,7 +120,9 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 			binding.btnPrint.setVisibility(View.VISIBLE);
 			binding.btnOther.setVisibility(View.GONE);
 
-
+			if (this.paymentStatus != null) {
+				setState(Constant.BLUETOOTH_PRINT, paymentStatus);
+			}
 
 			stopRepeatingTask();
 		}
