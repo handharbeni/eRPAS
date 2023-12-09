@@ -2,7 +2,6 @@ package io.github.handharbeni.erpas.ui.wp;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+
+import java.util.Objects;
 
 import io.github.handharbeni.erpas.apis.responses.WP.DataTagihan;
 import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
@@ -31,15 +32,13 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	PaymentStatus paymentStatus;
 
-	private int mInterval = 5000; // 5 seconds by default, can be changed later
 	private Handler mHandler;
-	private boolean recurringCheck = true;
 
 	Runnable mStatusChecker = () -> {
 		try {
-			if (recurringCheck) {
-				checkStatus();
-			}
+			checkStatus();
+//			if (recurringCheck) {
+//			}
 		} catch (Exception ignored) {
 		}
 	};
@@ -112,10 +111,16 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 		if (paymentStatus.getStatusBayar().equalsIgnoreCase("0")) {
 			// belum ada pembayaran
+			Objects.requireNonNull(binding.txtIdStatus).setText("Status Pembayaran: Belum diterima");
+
+			binding.btnPrint.setVisibility(View.GONE);
+			binding.btnOther.setVisibility(View.VISIBLE);
+			stopRepeatingTask();
+			startRepeatingTask();
 		} else {
 			// sudah ada pembayaran
 
-			binding.txtIdStatus.setText("Status Pembayaran: Belum diterima");
+			binding.txtIdStatus.setText("Status Pembayaran: Sudah diterima");
 
 			binding.btnPrint.setVisibility(View.VISIBLE);
 			binding.btnOther.setVisibility(View.GONE);
@@ -123,7 +128,6 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 			if (this.paymentStatus != null) {
 				setState(Constant.BLUETOOTH_PRINT, paymentStatus);
 			}
-
 			stopRepeatingTask();
 		}
 
@@ -162,6 +166,7 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 	@Override
 	public void onFailed(String message) {
 		doneLoading();
+		stopRepeatingTask();
 		startRepeatingTask();
 	}
 
@@ -171,13 +176,15 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 
 	void startRepeatingTask() {
+		// 5 seconds by default, can be changed later
+		int mInterval = 5000;
 		mHandler.postDelayed(mStatusChecker, mInterval);
 	}
 
 	void stopRepeatingTask() {
 		doneLoading();
 		mHandler.removeCallbacks(mStatusChecker);
-		recurringCheck = false;
+		boolean recurringCheck = false;
 	}
 
 	@Override
