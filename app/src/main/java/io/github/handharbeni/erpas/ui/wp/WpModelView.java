@@ -40,6 +40,45 @@ public class WpModelView extends BaseModelView {
 		this.wpCallback = wpCallback;
 	}
 
+	public void changePassword(String passwordLama, String passwordBaru) {
+		wpCallback.onLoad();
+
+		HashMap<String, String> dataPassword = new HashMap<>();
+		dataPassword.put("_id_user", getDb(this.context).getString("IdUser"));
+		dataPassword.put("password_lama", passwordLama);
+		dataPassword.put("password_baru", passwordBaru);
+
+		JSONObject jsonObject = new JSONObject(dataPassword);
+
+		MediaType mediaType = MediaType.parse("application/json");
+		RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
+
+
+		client.changePassword(body).enqueue(new Callback<GeneralResponse>() {
+			@Override
+			public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+				if (response.isSuccessful()) {
+					if (response.body() != null) {
+						if (response.body().getStatus().equalsIgnoreCase("Sukses")) {
+							wpCallback.onSuccessChangePassword();
+						} else {
+							wpCallback.onFailed(response.body().getExpose());
+						}
+					} else {
+						wpCallback.onFailed("Something went wrong for update your password");
+					}
+				} else {
+					wpCallback.onFailed("Something went wrong");
+				}
+			}
+
+			@Override
+			public void onFailure(Call<GeneralResponse> call, Throwable t) {
+				wpCallback.onFailed(t.getMessage());
+			}
+		});
+	}
+
 	public void fetchWp(String npwrd) {
 		wpCallback.onLoad();
 
@@ -313,6 +352,7 @@ public class WpModelView extends BaseModelView {
 		void onSuccess(ResponseWp responseWp);
 		void onPaymentSuccess(PaymentStatus paymentStatus);
 		void onSuccessTutup();
+		void onSuccessChangePassword();
 		void onSkrdSuccess(ListResponseSkrd listResponseSkrd);
 		void onRealisasiSuccess(LaporanRealisasi laporanRealisasi);
 		void onSuccessQris(String qris);

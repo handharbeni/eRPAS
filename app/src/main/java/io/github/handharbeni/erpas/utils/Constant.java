@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class Constant {
-    public static final String BASE_URL = "http://36.66.115.131:8000/API_Retribusi_Pasar/";
+//    public static final String BASE_URL = "http://36.66.115.131:8000/API_Retribusi_Pasar/";
+    public static final String BASE_URL = "http://simpatda.bekasikota.go.id/API_Retribusi_Pasar/";
     public static final String BASE_IMAGE = "https://via.placeholder.com/100.png?text=";
 //    public static final String UUID = "0b000001-0000-0001-1010-000000";
     public static final String UUID = "00001101-0000-1000-8000-00805F9B34FB";

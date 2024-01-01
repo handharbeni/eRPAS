@@ -2,7 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menuGantiPassword"
+        app:showAsAction="collapseActionView"
+        android:title="Ganti Password"/>
+    <item
         android:id="@+id/menuLogout"
-        app:showAsAction="always"
+        app:showAsAction="collapseActionView"
         android:title="Log Out"/>
 </menu>

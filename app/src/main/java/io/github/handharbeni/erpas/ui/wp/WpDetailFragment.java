@@ -87,6 +87,10 @@ public class WpDetailFragment extends BaseFragment
 
 	@Override
 	public void onSuccessTutup() {
+	}
+
+	@Override
+	public void onSuccessChangePassword() {
 		doneLoading();
 		navController.navigateUp();
 	}

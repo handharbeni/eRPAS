@@ -141,6 +141,11 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 	}
 
 	@Override
+	public void onSuccessChangePassword() {
+
+	}
+
+	@Override
 	public void onSkrdSuccess(ListResponseSkrd listResponseSkrd) {
 		doneLoading();
 	}
@@ -177,7 +182,7 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	void startRepeatingTask() {
 		// 5 seconds by default, can be changed later
-		int mInterval = 5000;
+		int mInterval = 10000;
 		mHandler.postDelayed(mStatusChecker, mInterval);
 	}
 
@@ -189,9 +194,13 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		stopRepeatingTask();
+		super.onDestroy();
 	}
 
-
+	@Override
+	public void onDetach() {
+		stopRepeatingTask();
+		super.onDetach();
+	}
 }

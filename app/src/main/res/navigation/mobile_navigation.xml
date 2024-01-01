@@ -10,6 +10,7 @@
         android:name="io.github.handharbeni.erpas.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
+
         <action
             android:id="@+id/action_navigation_home_to_navigation_search_wp"
             app:destination="@id/navigation_search_wp" />
@@ -28,6 +29,9 @@
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_navigation_home_to_wpChangePasswordFragment"
+            app:destination="@id/wpChangePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_search_wp"
@@ -114,5 +118,9 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/wpChangePasswordFragment"
+        android:name="io.github.handharbeni.erpas.ui.wp.WpChangePasswordFragment"
+        android:label="WpChangePasswordFragment" />
 
 </navigation>

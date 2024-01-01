@@ -68,14 +68,16 @@ public class HomeFragment extends BaseFragment implements MenuAdapter.MenuCallba
 
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.menuLogout :
-				logout();
-				navigate(R.id.action_navigation_home_to_loginFragment);
-				hideToolbar(requireActivity());
-			default:
-				return super.onOptionsItemSelected(item);
+
+		if (item.getItemId() == R.id.menuLogout) {
+			logout();
+			navigate(R.id.action_navigation_home_to_loginFragment);
+			hideToolbar(requireActivity());
+		} else if (item.getItemId() == R.id.menuGantiPassword) {
+			navigate(R.id.action_navigation_home_to_wpChangePasswordFragment);
+			hideToolbar(requireActivity());
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

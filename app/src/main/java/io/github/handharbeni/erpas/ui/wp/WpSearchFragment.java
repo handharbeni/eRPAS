@@ -61,7 +61,6 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-
 		try {
 			if (getArguments() != null) {
 				directScan = getArguments().getBoolean(DIRECT_SCAN);
@@ -111,6 +110,11 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 	}
 
 	@Override
+	public void onSuccessChangePassword() {
+
+	}
+
+	@Override
 	public void onSkrdSuccess(ListResponseSkrd listResponseSkrd) {
 		doneLoading();
 		Bundle bundle = new Bundle();
@@ -138,14 +142,14 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 
 	void scanQr(View view) {
 		ScanOptions options = new ScanOptions();
-		options.setDesiredBarcodeFormats(ScanOptions.ALL_CODE_TYPES);
+		options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
 		options.setOrientationLocked(false);
 		options.setPrompt("Kios QRCODE");
 		options.setCameraId(0);
 		options.setBeepEnabled(true);
 		options.setBarcodeImageEnabled(true);
 
-		barcodeLauncher.launch(new ScanOptions());
+		barcodeLauncher.launch(options);
 	}
 
 	// Register the launcher and result handler

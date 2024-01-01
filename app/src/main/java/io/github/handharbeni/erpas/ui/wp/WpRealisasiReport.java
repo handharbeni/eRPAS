@@ -80,6 +80,11 @@ public class WpRealisasiReport extends BaseFragment implements WpModelView.WpCal
 	}
 
 	@Override
+	public void onSuccessChangePassword() {
+
+	}
+
+	@Override
 	public void onSkrdSuccess(ListResponseSkrd listResponseSkrd) {
 		doneLoading();
 	}

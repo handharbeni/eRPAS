@@ -28,6 +28,10 @@ import retrofit2.http.POST;
 
 public interface ClientInterface {
 //    @HTTP(method = "GET", path = "request_wp", hasBody = true)
+
+    @POST("update_password")
+    Call<GeneralResponse> changePassword(@Body RequestBody requestBody);
+
     @POST("request_wp")
     Call<ResponseWp> requestWp(@Body RequestBody requestBody);
 

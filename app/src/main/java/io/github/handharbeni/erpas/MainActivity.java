@@ -1,5 +1,7 @@
 package io.github.handharbeni.erpas;
 
+import static io.github.handharbeni.erpas.ui.home.HomeFragment.TAG_PAYMENT;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -112,6 +114,7 @@ public class MainActivity extends BaseActivity implements BluetoothService.OnBlu
 		binding.fabScanQr.setOnClickListener(view -> {
 			Bundle bundle = new Bundle();
 			bundle.putBoolean(WpSearchFragment.DIRECT_SCAN, true);
+			bundle.putBoolean(TAG_PAYMENT, true);
 			navController.navigate(R.id.navigation_search_wp, bundle);
 		});
 	}

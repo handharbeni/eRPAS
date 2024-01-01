@@ -137,6 +137,11 @@ public class WpLaporanSkrd extends BaseFragment
 	}
 
 	@Override
+	public void onSuccessChangePassword() {
+
+	}
+
+	@Override
 	public void onSkrdSuccess(ListResponseSkrd listResponseSkrd) {
 		doneLoading();
 		this.listResponseSkrd = listResponseSkrd;
