@@ -183,6 +183,8 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 	void startRepeatingTask() {
 		// 5 seconds by default, can be changed later
 		int mInterval = 10000;
+		mHandler.removeCallbacks(mStatusChecker);
+		mHandler = new Handler();
 		mHandler.postDelayed(mStatusChecker, mInterval);
 	}
 
@@ -190,6 +192,12 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 		doneLoading();
 		mHandler.removeCallbacks(mStatusChecker);
 		boolean recurringCheck = false;
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		stopRepeatingTask();
 	}
 
 	@Override
