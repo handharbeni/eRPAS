@@ -9,6 +9,9 @@ public class PaymentStatus implements Serializable {
 	@SerializedName("status")
 	@Expose
 	private String status;
+	@SerializedName("nm_wp_wr")
+	@Expose
+	private String nmWpWr;
 	@SerializedName("npwrd")
 	@Expose
 	private String npwrd;
@@ -43,6 +46,14 @@ public class PaymentStatus implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getNmWpWr() {
+		return nmWpWr;
+	}
+
+	public void setNmWpWr(String nmWpWr) {
+		this.nmWpWr = nmWpWr;
 	}
 
 	public String getNpwrd() {

@@ -195,6 +195,7 @@ public class WpLaporanSkrd extends BaseFragment
 		paymentStatus.setKodeBilling(dataSkrd.getKodeBilling());
 		paymentStatus.setStatusBayar(dataSkrd.getStatusBayar());
 		paymentStatus.setStatus(dataSkrd.getStatusKetetapan());
+		paymentStatus.setNmWpWr(dataSkrd.getWpWrNama());
 
 		setState(Constant.BLUETOOTH_PRINT, paymentStatus);
 	}

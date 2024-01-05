@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -349,7 +350,7 @@ public class MainActivity extends BaseActivity implements BluetoothService.OnBlu
 	}
 
 	void print(PaymentStatus paymentStatus) {
-		new PrintAsyncTask(this, getApplicationContext()).execute(paymentStatus);
+		new PrintAsyncTask(this, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, paymentStatus);
 	}
 
 	void observeChild(NavController navController, NavDestination navDestination, Bundle arguments) {
@@ -442,6 +443,7 @@ public class MainActivity extends BaseActivity implements BluetoothService.OnBlu
 								"[L]" + context.getResources().getString(R.string.print_date) + "[R]" + printWp.getTransactionDate() + "\n" +
 								"[C]================================\n" +
 								"[L]" + context.getResources().getString(R.string.print_npwrd) + "[R]" + printWp.getNpwrd() + "\n" +
+								"[L]" + context.getResources().getString(R.string.print_nama_wp) + "[R]" + printWp.getNmWpWr() + "\n" +
 								"[L]" + context.getResources().getString(R.string.print_kode_billing) + "[R]" + printWp.getKodeBilling() + "\n" +
 								"[L]" + context.getResources().getString(R.string.print_nominal) + "[R]" + printWp.getAmount() + "\n" +
 								"[L]" + context.getResources().getString(R.string.print_status) + "[R]" + (printWp.getStatusBayar().equalsIgnoreCase("0")?"Belum Lunas":"Lunas") + "\n" +
