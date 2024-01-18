@@ -12,6 +12,7 @@ import java.util.HashMap;
 import io.github.handharbeni.erpas.apis.Client;
 import io.github.handharbeni.erpas.apis.ClientInterface;
 import io.github.handharbeni.erpas.apis.responses.WP.DataQris;
+import io.github.handharbeni.erpas.apis.responses.WP.DataStatusPayment;
 import io.github.handharbeni.erpas.apis.responses.WP.GeneralResponse;
 import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
 import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
@@ -341,6 +342,57 @@ public class WpModelView extends BaseModelView {
 
 			@Override
 			public void onFailure(@NonNull Call<LaporanRealisasi> call, @NonNull Throwable t) {
+				wpCallback.onFailed(t.getMessage());
+			}
+		});
+	}
+
+	public void checkPaymentStatus(PaymentStatus paymentStatus) {
+		wpCallback.onLoad();
+
+		HashMap<String, String> dataQris = new HashMap<>();
+		dataQris.put("qris_id", paymentStatus.getInvoiceId());
+
+		JSONObject jsonObject = new JSONObject(dataQris);
+
+		MediaType mediaType = MediaType.parse("application/json");
+		RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
+		client.cekPayment(body).enqueue(new Callback<DataStatusPayment>() {
+			@Override
+			public void onResponse(
+					Call<DataStatusPayment> call, Response<DataStatusPayment> response
+			) {
+				if (response.isSuccessful()) {
+					if (response.body() != null) {
+						if (response.body().getStatus().equalsIgnoreCase("sukses")) {
+							boolean isPaid = response.body().getData().getIsPaid();
+							String recordStatus = response.body().getData().getRecordStatus();
+							String transactionStatus = response.body().getData().getTransactionStatus();
+
+							if (recordStatus.equalsIgnoreCase("live") && isPaid) {
+								// qris terbayar
+								DataStatusPayment.DataPayment dataPayment = response.body().getData();
+								paymentStatus.setStatus("Sukses");
+								paymentStatus.setKodeBilling(dataPayment.getMerchantMpan());
+								paymentStatus.setAmount(dataPayment.getTransactionAmount());
+								paymentStatus.setStatusBayar("1");
+								paymentStatus.setTransactionDate(dataPayment.getTransactionDate());
+								paymentStatus.setInvoiceId(dataPayment.getInvoiceNumber());
+								wpCallback.onPaymentSuccess(paymentStatus);
+							} else if (recordStatus.equalsIgnoreCase("reversed") && isPaid) {
+								// qris dikembalikan
+								wpCallback.onFailed("Pembayaran Gagal, Dana dikembalikan");
+							} else if (recordStatus.equalsIgnoreCase("confirming") && !isPaid) {
+								// qris belum terbayar
+								wpCallback.onFailed("QRIS belum terbayar");
+							}
+						}
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(Call<DataStatusPayment> call, Throwable t) {
 				wpCallback.onFailed(t.getMessage());
 			}
 		});

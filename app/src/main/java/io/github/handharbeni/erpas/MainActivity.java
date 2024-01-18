@@ -11,7 +11,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -52,7 +51,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
-import io.github.handharbeni.erpas.apis.responses.WP.PrintWp;
 import io.github.handharbeni.erpas.cores.BaseActivity;
 import io.github.handharbeni.erpas.database.AppDb;
 import io.github.handharbeni.erpas.databinding.ActivityMainBinding;
@@ -174,12 +172,7 @@ public class MainActivity extends BaseActivity implements BluetoothService.OnBlu
 			bluetoothConnected = true;
 			EventBus.getDefault().post(new BluetoothEvent(BluetoothEvent.BTEvent.BLUETOOTH_CONNECTED, BluetoothStatus.CONNECTED));
 //			navController.navigate(R.id.navigation_home);
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					navController.navigate(R.id.navigation_home);
-				}
-			});
+			runOnUiThread(() -> navController.navigate(R.id.navigation_home));
 		} else if (status == BluetoothStatus.CONNECTING) {
 			bluetoothConnected = false;
 			EventBus.getDefault().post(new BluetoothEvent(BluetoothEvent.BTEvent.BLUETOOTH_CONNECTED, BluetoothStatus.CONNECTING));

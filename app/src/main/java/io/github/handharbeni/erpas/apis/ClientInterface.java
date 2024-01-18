@@ -3,6 +3,7 @@ package io.github.handharbeni.erpas.apis;
 import io.github.handharbeni.erpas.apis.responses.DataResponse;
 import io.github.handharbeni.erpas.apis.responses.ListResponse;
 import io.github.handharbeni.erpas.apis.responses.WP.DataQris;
+import io.github.handharbeni.erpas.apis.responses.WP.DataStatusPayment;
 import io.github.handharbeni.erpas.apis.responses.WP.GeneralResponse;
 import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
 import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
@@ -15,7 +16,6 @@ import io.github.handharbeni.erpas.apis.responses.data.DataDendaPayment;
 import io.github.handharbeni.erpas.apis.responses.data.DataLogin;
 import io.github.handharbeni.erpas.apis.responses.data.DataObjekPbb;
 import io.github.handharbeni.erpas.apis.responses.data.DataPbbBayar;
-import io.github.handharbeni.erpas.apis.responses.data.DataStatusPayment;
 import io.github.handharbeni.erpas.utils.Constant;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -58,4 +58,7 @@ public interface ClientInterface {
 
     @POST("register_user")
     Call<ResponseRegister> register(@Body RequestBody requestBody);
+
+    @POST("cek_status_qris")
+    Call<DataStatusPayment> cekPayment(@Body RequestBody requestBody);
 }

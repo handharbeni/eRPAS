@@ -33,12 +33,15 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 	PaymentStatus paymentStatus;
 
 	private Handler mHandler;
+	int counterStatus = 0;
+
+	String qrisId = "";
 
 	Runnable mStatusChecker = () -> {
 		try {
+			counterStatus++;
+
 			checkStatus();
-//			if (recurringCheck) {
-//			}
 		} catch (Exception ignored) {
 		}
 	};
@@ -92,6 +95,7 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 				setState(Constant.BLUETOOTH_PRINT, paymentStatus);
 			}
 		});
+		binding.btnCheckPayment.setOnClickListener(v -> wpModelView.checkPaymentStatus(paymentStatus));
 	}
 
 	@Override
@@ -114,7 +118,10 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 			Objects.requireNonNull(binding.txtIdStatus).setText("Status Pembayaran: Belum diterima");
 
 			binding.btnPrint.setVisibility(View.GONE);
-			binding.btnOther.setVisibility(View.VISIBLE);
+//			binding.btnOther.setVisibility(View.VISIBLE);
+			if (counterStatus >= 2) {
+				binding.btnCheckPayment.setVisibility(View.VISIBLE);
+			}
 			stopRepeatingTask();
 			startRepeatingTask();
 		} else {
@@ -123,7 +130,8 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 			binding.txtIdStatus.setText("Status Pembayaran: Sudah diterima");
 
 			binding.btnPrint.setVisibility(View.VISIBLE);
-			binding.btnOther.setVisibility(View.GONE);
+//			binding.btnOther.setVisibility(View.GONE);
+			binding.btnCheckPayment.setVisibility(View.GONE);
 
 			if (this.paymentStatus != null) {
 				setState(Constant.BLUETOOTH_PRINT, paymentStatus);
@@ -157,6 +165,7 @@ public class WpDetailQrisFragment extends BaseFragment implements WpModelView.Wp
 
 	@Override
 	public void onSuccessQris(String qris) {
+		this.qrisId = qris;
 		binding.btnOther.setVisibility(View.GONE);
 
 		binding.txtIdStatus.setText("Status Pembayaran: Belum diterima");

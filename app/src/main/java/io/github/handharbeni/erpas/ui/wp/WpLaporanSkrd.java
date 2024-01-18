@@ -1,8 +1,5 @@
 package io.github.handharbeni.erpas.ui.wp;
 
-import static io.github.handharbeni.erpas.ui.wp.WpSearchFragment.TAG_NPWRD;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.github.handharbeni.erpas.R;
 import io.github.handharbeni.erpas.apis.responses.WP.DataSkrd;
@@ -43,7 +39,6 @@ public class WpLaporanSkrd extends BaseFragment
 
 	ListResponseSkrd listResponseSkrd;
 
-	ListResponseSkrd tempListResponseSkrd;
 	String npwrd;
 
 	@Nullable

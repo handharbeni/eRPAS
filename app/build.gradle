@@ -16,12 +16,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            def date = new Date();
-            def formattedDate = date.format('ddMMyy-HHmm')
-            outputFileName = "E-RPas-${variant.name}-${variant.versionName}-${formattedDate}.apk"
-        }
+    applicationVariants.configureEach {
+        variant ->
+            variant.outputs.configureEach {
+                def date = new Date();
+                def formattedDate = date.format('ddMMyy-HHmm')
+                outputFileName = "E-RPas-${variant.name}-${variant.versionName}-${formattedDate}.apk"
+            }
     }
 
     buildTypes {
@@ -43,36 +44,36 @@ android {
 
 dependencies {
     implementation 'androidx.asynclayoutinflater:asynclayoutinflater:1.0.0'
-    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.7'
-    def room_version = "2.5.1"
+    implementation 'io.github.vicmikhailau:MaskedEditText:5.0.1'
+    def room_version = '2.6.1'
     def eventbus_version = "3.3.1"
-    def autovalue_version = "1.9"
+    def autovalue_version = '1.10.4'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
-    implementation 'com.google.firebase:firebase-firestore'
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-firestore:24.10.0'
 
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
 //    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0-alpha04'
+    implementation 'com.google.android.material:material:1.11.0'
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment:2.6.0'
-    implementation 'androidx.navigation:navigation-ui:2.6.0'
+    implementation 'androidx.navigation:navigation-fragment:2.7.6'
+    implementation 'androidx.navigation:navigation-ui:2.7.6'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3'
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.12'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -85,19 +86,19 @@ dependencies {
     compileOnly "com.google.auto.value:auto-value-annotations:$autovalue_version"
     annotationProcessor "com.google.auto.value:auto-value:$autovalue_version"
 
-    implementation "com.github.skydoves:balloon:1.4.6"
+    implementation 'com.github.skydoves:balloon:1.6.4'
 
     implementation "dev.priyankvasa.android:cameraview-ex:3.5.5-alpha"
 
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.0'
 
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation('com.journeyapps:zxing-android-embedded:4.3.0') { transitive = false }
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
-    implementation 'com.google.zxing:core:3.3.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    implementation 'com.google.zxing:core:3.5.2'
 
 
     implementation 'com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.2.0'
