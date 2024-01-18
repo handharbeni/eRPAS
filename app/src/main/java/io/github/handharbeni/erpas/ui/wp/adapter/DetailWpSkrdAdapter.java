@@ -2,7 +2,6 @@ package io.github.handharbeni.erpas.ui.wp.adapter;
 
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.handharbeni.erpas.apis.responses.WP.DataSkrd;
 import io.github.handharbeni.erpas.databinding.FragmentSkrdItemBinding;
 
 public class DetailWpSkrdAdapter extends RecyclerView.Adapter<DetailWpSkrdAdapter.ViewHolder>{
-	private Context context;
 	private List<DataSkrd> listSkrd;
-	private List<DataSkrd> tempListSkrd;
-	private SkrdCallback skrdCallback;
+	private final SkrdCallback skrdCallback;
 
 	public DetailWpSkrdAdapter(
 			Context context, List<DataSkrd> listSkrd, SkrdCallback skrdCallback
 	) {
-		this.context = context;
 		this.listSkrd = listSkrd;
-		this.tempListSkrd = listSkrd;
 		this.skrdCallback = skrdCallback;
 	}
 
@@ -65,7 +59,8 @@ public class DetailWpSkrdAdapter extends RecyclerView.Adapter<DetailWpSkrdAdapte
 	public void updateData(List<DataSkrd> listSkrd){
 		this.listSkrd.clear();
 		this.listSkrd = listSkrd;
-		notifyDataSetChanged();;
+		notifyItemRangeChanged(0, listSkrd.size());
+//		notifyDataSetChanged();
 	}
 
 	public void filterStatus(String status) {
