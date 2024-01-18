@@ -54,6 +54,7 @@ public class DetailWpSkrdAdapter extends RecyclerView.Adapter<DetailWpSkrdAdapte
 		holder.itemView.setOnClickListener(v -> skrdCallback.onItemClick(dataSkrd));
 		holder.binding.btnQris.setOnClickListener(v -> skrdCallback.onQrisClick(dataSkrd));
 		holder.binding.btnPrint.setOnClickListener(v -> skrdCallback.onPrintClick(dataSkrd));
+		holder.binding.btnCheckPayment.setOnClickListener(v -> skrdCallback.onPaymentCheck(dataSkrd));
 	}
 
 	@Override
@@ -143,5 +144,6 @@ public class DetailWpSkrdAdapter extends RecyclerView.Adapter<DetailWpSkrdAdapte
 		void onItemClick(DataSkrd dataSkrd);
 		void onQrisClick(DataSkrd dataSkrd);
 		void onPrintClick(DataSkrd dataSkrd);
+		void onPaymentCheck(DataSkrd dataSkrd);
 	}
 }

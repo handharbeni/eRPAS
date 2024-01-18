@@ -1,7 +1,5 @@
 package io.github.handharbeni.erpas.apis;
 
-import io.github.handharbeni.erpas.apis.responses.DataResponse;
-import io.github.handharbeni.erpas.apis.responses.ListResponse;
 import io.github.handharbeni.erpas.apis.responses.WP.DataQris;
 import io.github.handharbeni.erpas.apis.responses.WP.DataStatusPayment;
 import io.github.handharbeni.erpas.apis.responses.WP.GeneralResponse;
@@ -11,19 +9,9 @@ import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
 import io.github.handharbeni.erpas.apis.responses.WP.ResponseLogin;
 import io.github.handharbeni.erpas.apis.responses.WP.ResponseRegister;
 import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
-import io.github.handharbeni.erpas.apis.responses.data.DataBphtb;
-import io.github.handharbeni.erpas.apis.responses.data.DataDendaPayment;
-import io.github.handharbeni.erpas.apis.responses.data.DataLogin;
-import io.github.handharbeni.erpas.apis.responses.data.DataObjekPbb;
-import io.github.handharbeni.erpas.apis.responses.data.DataPbbBayar;
-import io.github.handharbeni.erpas.utils.Constant;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 
 public interface ClientInterface {

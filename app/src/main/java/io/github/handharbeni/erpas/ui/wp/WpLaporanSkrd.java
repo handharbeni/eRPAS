@@ -194,4 +194,18 @@ public class WpLaporanSkrd extends BaseFragment
 
 		setState(Constant.BLUETOOTH_PRINT, paymentStatus);
 	}
+
+	@Override
+	public void onPaymentCheck(DataSkrd dataSkrd) {
+		PaymentStatus paymentStatus = new PaymentStatus();
+		paymentStatus.setAmount(dataSkrd.getTotalRetribusi());
+		paymentStatus.setTransactionDate(dataSkrd.getTglSkrd());
+		paymentStatus.setNpwrd(dataSkrd.getNpwrd());
+		paymentStatus.setKodeBilling(dataSkrd.getKodeBilling());
+		paymentStatus.setStatusBayar(dataSkrd.getStatusBayar());
+		paymentStatus.setStatus(dataSkrd.getStatusKetetapan());
+		paymentStatus.setNmWpWr(dataSkrd.getWpWrNama());
+
+		wpModelView.checkPaymentStatus(paymentStatus);
+	}
 }

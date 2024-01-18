@@ -140,6 +140,17 @@
             android:layout_height="wrap_content">
             <com.google.android.material.button.MaterialButton
                 android:visibility="gone"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:layout_weight="0.5"
+                app:cornerRadius="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:id="@+id/btnCheckPayment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="CEK ULANG PEMBAYARAN"/>
+            <com.google.android.material.button.MaterialButton
+                android:visibility="gone"
                 android:backgroundTint="@android:color/holo_green_dark"
                 app:cornerRadius="0dp"
                 android:insetTop="0dp"
