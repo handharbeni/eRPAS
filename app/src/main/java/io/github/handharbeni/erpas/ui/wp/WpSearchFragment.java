@@ -3,13 +3,18 @@ package io.github.handharbeni.erpas.ui.wp;
 import static io.github.handharbeni.erpas.ui.home.HomeFragment.TAG_PAYMENT;
 import static io.github.handharbeni.erpas.ui.home.HomeFragment.TAG_SKRD;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
@@ -25,6 +30,7 @@ import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
 import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
 import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
 import io.github.handharbeni.erpas.cores.BaseFragment;
+import io.github.handharbeni.erpas.cores.ScannerActivity;
 import io.github.handharbeni.erpas.databinding.FragmentSearchWpBinding;
 
 public class WpSearchFragment extends BaseFragment implements WpModelView.WpCallback {
@@ -141,15 +147,24 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 	}
 
 	void scanQr(View view) {
-		ScanOptions options = new ScanOptions();
-		options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-		options.setOrientationLocked(false);
-		options.setPrompt("Kios QRCODE");
-		options.setCameraId(0);
-		options.setBeepEnabled(true);
-		options.setBarcodeImageEnabled(true);
-
+//		ScanOptions options = new ScanOptions();
+//		options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+//		options.setOrientationLocked(false);
+//		options.setPrompt("Kios QRCODE");
+//		options.setCameraId(0);
+//		options.setBeepEnabled(true);
+//		options.setBarcodeImageEnabled(true);
+//
+//		barcodeLauncher.launch(options);
+		ScanOptions options = new ScanOptions()
+				.setOrientationLocked(true)
+				.setCaptureActivity(ScannerActivity.class)
+				.setCameraId(0)
+				.setBeepEnabled(false)
+				.setBarcodeImageEnabled(true)
+				.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
 		barcodeLauncher.launch(options);
+
 	}
 
 	// Register the launcher and result handler
