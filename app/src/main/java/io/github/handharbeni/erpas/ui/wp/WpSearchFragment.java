@@ -2,6 +2,7 @@ package io.github.handharbeni.erpas.ui.wp;
 
 import static io.github.handharbeni.erpas.ui.home.HomeFragment.TAG_PAYMENT;
 import static io.github.handharbeni.erpas.ui.home.HomeFragment.TAG_SKRD;
+import static io.github.handharbeni.erpas.ui.wp.WpDetailFragment.KEY_WP;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,7 +25,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import java.util.ArrayList;
+
 import io.github.handharbeni.erpas.R;
+import io.github.handharbeni.erpas.apis.responses.WP.DataTagihan;
+import io.github.handharbeni.erpas.apis.responses.WP.DataWp;
 import io.github.handharbeni.erpas.apis.responses.WP.LaporanRealisasi;
 import io.github.handharbeni.erpas.apis.responses.WP.ListResponseSkrd;
 import io.github.handharbeni.erpas.apis.responses.WP.PaymentStatus;
@@ -32,6 +37,7 @@ import io.github.handharbeni.erpas.apis.responses.WP.ResponseWp;
 import io.github.handharbeni.erpas.cores.BaseFragment;
 import io.github.handharbeni.erpas.cores.ScannerActivity;
 import io.github.handharbeni.erpas.databinding.FragmentSearchWpBinding;
+import io.github.handharbeni.erpas.utils.UtilDate;
 
 public class WpSearchFragment extends BaseFragment implements WpModelView.WpCallback {
 
@@ -47,6 +53,7 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 	boolean directScan = false;
 	boolean payment = false;
 	boolean skrd = false;
+	private ResponseWp responseWp;
 
 
 	@Nullable
@@ -98,10 +105,13 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 	@Override
 	public void onSuccess(ResponseWp responseWp) {
 		doneLoading();
-		Bundle bundle = new Bundle();
-		bundle.putSerializable(WpDetailFragment.KEY_WP, responseWp);
+		this.responseWp = responseWp;
+		setupNpwrdData();
+		binding.svDetailNpwrd.setVisibility(View.VISIBLE);
+//		Bundle bundle = new Bundle();
+//		bundle.putSerializable(WpDetailFragment.KEY_WP, responseWp);
 
-		navController.navigate(R.id.action_navigation_search_wp_to_navigation_detail_wp, bundle);
+//		navController.navigate(R.id.action_navigation_search_wp_to_navigation_detail_wp, bundle);
 	}
 
 	@Override
@@ -166,6 +176,42 @@ public class WpSearchFragment extends BaseFragment implements WpModelView.WpCall
 		barcodeLauncher.launch(options);
 
 	}
+
+	void setupNpwrdData() {
+		checkQris();
+		DataWp dataWp = responseWp.getDataWp();
+
+		binding.txtNpwrd.setText(dataWp.getNpwrd());
+		binding.txtNama.setText(dataWp.getNmWpWr());
+		binding.txtAlamat.setText(dataWp.getAlamatWpWr());
+		binding.txtKota.setText(dataWp.getKota());
+		binding.txtNominal.setText(dataWp.getNominal());
+		binding.btnTutup.setOnClickListener(v -> wpModelView.kiosTutup(dataWp.getNpwrd(), dataWp.getNominal()));
+		binding.btnQris.setOnClickListener(v -> {
+			String date = UtilDate.longToDate(System.currentTimeMillis(), "M");
+			utilDb.putBoolean(date+"-"+dataWp.getNpwrd(), true);
+			binding.btnTutup.setEnabled(false);
+
+			DataTagihan dataTagihan = new DataTagihan();
+			dataTagihan.setKdRekening(dataWp.getNpwrd());
+			dataTagihan.setTotalRetribusi(dataWp.getNominal());
+
+			onQrisClick(dataTagihan);
+		});
+	}
+
+	void checkQris() {
+		String date = UtilDate.longToDate(System.currentTimeMillis(), "M");
+		boolean hasQris = utilDb.getBoolean(date+"-"+ responseWp.getDataWp().getNpwrd());
+		binding.btnTutup.setEnabled(!hasQris);
+	}
+
+	public void onQrisClick(DataTagihan dataTagihan) {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(KEY_WP, dataTagihan);
+		navController.navigate(R.id.action_navigation_search_wp_to_navigation_detail_qris_wp, bundle);
+	}
+
 
 	// Register the launcher and result handler
 	private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(

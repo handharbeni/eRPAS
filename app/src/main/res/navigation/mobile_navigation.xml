@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_navigation_search_wp_to_wpLaporanSkrd"
             app:destination="@id/wpLaporanSkrd" />
+        <action
+            android:id="@+id/action_navigation_search_wp_to_navigation_detail_qris_wp"
+            app:destination="@id/navigation_detail_qris_wp" />
     </fragment>
     <fragment
         android:id="@+id/navigation_detail_wp"

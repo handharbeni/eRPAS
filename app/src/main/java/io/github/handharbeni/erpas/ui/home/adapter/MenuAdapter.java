@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieDrawable;
 import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
 
+import io.github.handharbeni.erpas.R;
 import io.github.handharbeni.erpas.databinding.FragmentHomeMenuItemBinding;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
@@ -46,7 +48,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
 		String title = (String) listMenu.keySet().toArray()[position];
 		Drawable image = listMenu.get(title);
 
-		holder.bindData(title, image);
+		holder.bindData(title);
 		holder.itemView.setOnClickListener(view -> {
 			menuCallback.onItemClick(title);
 		});
@@ -67,6 +69,27 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
 		public void bindData(String title, Drawable image) {
 			binding.itemTitle.setText(title);
 			Glide.with(context).load(image).into(binding.itemImage);
+		}
+
+		public void bindData(String title) {
+			binding.itemTitle.setText(title);
+
+			int rawLottie = R.raw.scanqr;
+			if (title.equalsIgnoreCase("pembayaran")) {
+				rawLottie = R.raw.scanqr;
+			} else if (title.equalsIgnoreCase("skrd")) {
+				rawLottie = R.raw.skrdreport;
+			} else if (title.equalsIgnoreCase("data pasar")) {
+				rawLottie = R.raw.market;
+			} else if (title.equalsIgnoreCase("realisasi")) {
+				rawLottie = R.raw.realisasi;
+			}
+
+			binding.itemImage.setAnimation(rawLottie);
+			binding.itemImage.setRepeatMode(LottieDrawable.RESTART);
+			binding.itemImage.loop(true);
+			binding.itemImage.playAnimation();
+
 		}
 	}
 

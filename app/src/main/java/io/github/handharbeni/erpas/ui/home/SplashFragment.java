@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.airbnb.lottie.LottieDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -53,6 +54,11 @@ public class SplashFragment extends BaseFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		binding.ivLogo.setAnimation(R.raw.cart_load);
+		binding.ivLogo.setRepeatMode(LottieDrawable.RESTART);
+		binding.ivLogo.loop(true);
+		binding.ivLogo.playAnimation();
 	}
 
 	@Override
