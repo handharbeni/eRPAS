@@ -352,6 +352,7 @@ public class WpModelView extends BaseModelView {
 
 		HashMap<String, String> dataQris = new HashMap<>();
 		dataQris.put("qris_id", paymentStatus.getInvoiceId());
+		dataQris.put("_id_user", getDb(this.context).getString("IdUser"));
 
 		JSONObject jsonObject = new JSONObject(dataQris);
 
